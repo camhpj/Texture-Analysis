@@ -21,8 +21,10 @@ def split(img, n):
 
     return images
 
-dirDataset = '/home/cam/Documents/Texture-Analysis/train/'
+dirDataset = '/home/cam/Documents/Texture-Analysis/test-rotated-60/'
 dirTextures = sorted(listdir(dirDataset))
+
+angle = '060'
 
 for i in range(13):
     dirImage = dirDataset + dirTextures[i] + '/' + listdir(dirDataset + dirTextures[i])[0]
@@ -30,4 +32,4 @@ for i in range(13):
     cropped = split(img, 16)
     for j in range(len(cropped)):
         temp = Image.fromarray(cropped[j])
-        temp.save(f'{dirDataset}{dirTextures[i]}/{dirTextures[i]}_000_{j+1}.tiff')
+        temp.save(f'{dirDataset}{dirTextures[i]}/{dirTextures[i]}_{angle}_{j+1}.tiff')

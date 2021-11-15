@@ -61,8 +61,9 @@ if __name__ == '__main__':
     numBins = 32
 
     #--Dataset file path.
-    dirDataset = '/home/cam/Documents/Texture-Analysis/train/'
+    dirDataset = '/home/cam/Documents/Texture-Analysis/test-rotated-60/'
     dirTextures = sorted(listdir(dirDataset))
+    angle = '060'
 
     #--Allocate space for images.
     images = np.zeros((128, 128, 13, 16))
@@ -71,8 +72,7 @@ if __name__ == '__main__':
 
     for i in range(13):
         for j in range(16):
-            print(dirDataset + dirTextures[i] + '/' + dirTextures[i] + f'_000_{j+1}.tiff')
-            images[:, :, i, j] = np.array(Image.open(dirDataset + dirTextures[i] + '/' + dirTextures[i] + f'_000_{j+1}.tiff')).astype(np.uint8)
+            images[:, :, i, j] = np.array(Image.open(dirDataset + dirTextures[i] + '/' + dirTextures[i] + f'_{angle}_{j+1}.tiff')).astype(np.uint8)
 
     print("Done.")
     
@@ -87,6 +87,6 @@ if __name__ == '__main__':
         print(f'Finished texture #{i+1}')
 
     
-    mdic = {"mscm": MSCM, "Description": "This is the MSCM of the training images for the Brodatz dataset (radii 1, 2, 3, and 4)."}
-    savemat('/home/cam/Documents/Texture-Analysis/brodatz-train-mscm.mat', mdict=mdic)
+    mdic = {"brodatzMSCM_test_60": MSCM}
+    savemat('/home/cam/Documents/Texture-Analysis/brodatz-mscm-test-60.mat', mdict=mdic)
 
