@@ -65,30 +65,28 @@ if __name__ == '__main__':
     dirTextures = sorted(listdir(dirDataset))
 
     #--Allocate space for images.
-    images = np.zeros((13, 16, 128, 128))
+    images = np.zeros((128, 128, 13, 16))
 
     print("Reading images.")
 
-    n = 0
     for i in range(13):
-        dirImages = sorted(listdir(dirDataset + dirTextures[i]))
         for j in range(16):
-            images[i, j, :, :] = np.array(Image.open(dirDataset + dirTextures[i] + '/' + dirImages[j])).astype(np.uint8)
-            n += 1
+            print(dirDataset + dirTextures[i] + '/' + dirTextures[i] + f'_000_{j+1}.tiff')
+            images[:, :, i, j] = np.array(Image.open(dirDataset + dirTextures[i] + '/' + dirTextures[i] + f'_000_{j+1}.tiff')).astype(np.uint8)
 
     print("Done.")
     
-    #--Allocate space for MSCM. (Texture, image, r, MSCM, MSCM)
-    MSCM = np.zeros((13, 16, 4, 32, 32))
+    #--Allocate space for MSCM. (MSCM, MSCM, texture, image, r)
+    MSCM = np.zeros((32, 32, 13, 16, 4))
 
     r = [1, 2, 3, 4]
     for i in range(13):
         for j in range(16):
             for k in range(4):
-                MSCM[i, j, k, :, :] = findMSCM(images[i, j, :, :], maxGL, numBins, r[k])
+                MSCM[:, :, i, j, k] = findMSCM(images[:, :, i, j], maxGL, numBins, r[k])
         print(f'Finished texture #{i+1}')
 
     
-    mdic = {"brodatz-train-mscm": MSCM, "Description": "This is the MSCM of the training images for the Brodatz dataset (radii 1, 2, 3, and 4)."}
+    mdic = {"mscm": MSCM, "Description": "This is the MSCM of the training images for the Brodatz dataset (radii 1, 2, 3, and 4)."}
     savemat('/home/cam/Documents/Texture-Analysis/brodatz-train-mscm.mat', mdict=mdic)
 
