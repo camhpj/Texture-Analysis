@@ -61,9 +61,9 @@ if __name__ == '__main__':
     numBins = 32
 
     #--Dataset file path.
-    dirDataset = '/home/cam/Documents/Texture-Analysis/test-rotated-60/'
+    dirDataset = '/home/cam/Documents/Texture-Analysis/test-rotated-200/'
     dirTextures = sorted(listdir(dirDataset))
-    angle = '060'
+    angle = '200'
 
     #--Allocate space for images.
     images = np.zeros((128, 128, 13, 16))
@@ -87,6 +87,5 @@ if __name__ == '__main__':
         print(f'Finished texture #{i+1}')
 
     
-    mdic = {"brodatzMSCM_test_60": MSCM}
-    savemat('/home/cam/Documents/Texture-Analysis/brodatz-mscm-test-60.mat', mdict=mdic)
-
+    mdic = {"brodatzMSCM_test_200": MSCM}
+    savemat('/home/cam/Documents/Texture-Analysis/MSCM Files/brodatz-mscm-test-200.mat', mdict=mdic)
