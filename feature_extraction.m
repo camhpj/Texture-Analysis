@@ -22,5 +22,4 @@ end
 clear t i r
 
 %% save file
-
 save('MSCM Files/brodatz-features-test-200.mat', 'brodatzFeatures_test_200');
