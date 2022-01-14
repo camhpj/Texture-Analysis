@@ -21,10 +21,10 @@ def split(img, n):
 
     return images
 
-dirDataset = '/home/cam/Documents/Texture-Analysis/test-rotated-60/'
+dirDataset = '/home/cam/Documents/Fall 2021/Texture-Analysis/test-rotated-200/'
 dirTextures = sorted(listdir(dirDataset))
 
-angle = '060'
+angle = '200'
 
 for i in range(13):
     dirImage = dirDataset + dirTextures[i] + '/' + listdir(dirDataset + dirTextures[i])[0]
