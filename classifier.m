@@ -1,11 +1,25 @@
 %% Load feature arrays.
 load('MSCM Files/brodatz-features-train.mat');
+brodatzFeatures_train = brodatzFeatures;
+clear brodatzFeatures;
 load('MSCM Files/brodatz-features-test-30.mat');
+brodatzFeatures_test_30 = brodatzFeatures;
+clear brodatzFeatures;
 load('MSCM Files/brodatz-features-test-60.mat');
+brodatzFeatures_test_60 = brodatzFeatures;
+clear brodatzFeatures;
 load('MSCM Files/brodatz-features-test-90.mat');
+brodatzFeatures_test_90 = brodatzFeatures;
+clear brodatzFeatures;
 load('MSCM Files/brodatz-features-test-120.mat');
+brodatzFeatures_test_120 = brodatzFeatures;
+clear brodatzFeatures;
 load('MSCM Files/brodatz-features-test-150.mat');
+brodatzFeatures_test_150 = brodatzFeatures;
+clear brodatzFeatures;
 load('MSCM Files/brodatz-features-test-200.mat');
+brodatzFeatures_test_200 = brodatzFeatures;
+clear brodatzFeatures;
 
 %% Create label vector.
 labels = [];
@@ -53,7 +67,7 @@ for i = 1:13
 end, clear i
 
 %% Create KNN classifier for r=1.
-mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', 1);
+mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', false, 'Distance', 'cityblock');
 
 %% Make predictions for r=1.
 preds_30 = predict(mdl, x_test_30);
@@ -117,7 +131,7 @@ for i = 1:13
 end, clear i
 
 %% Create KNN classifier for r=2.
-mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', 1);
+mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', false, 'Distance', 'cityblock');
 
 %% Make predictions for r=2.
 preds_30 = predict(mdl, x_test_30);
@@ -181,7 +195,7 @@ for i = 1:13
 end, clear i
 
 %% Create KNN classifier for r=3.
-mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', 1);
+mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', false, 'Distance', 'cityblock');
 
 %% Make predictions for r=3.
 preds_30 = predict(mdl, x_test_30);
@@ -245,7 +259,7 @@ for i = 1:13
 end, clear i
 
 %% Create KNN classifier for r=4.
-mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', 1);
+mdl = fitcknn(x_train, labels, 'NumNeighbors', 1, 'Standardize', false, 'Distance', 'cityblock');
 
 %% Make predictions for r=4.
 preds_30 = predict(mdl, x_test_30);
