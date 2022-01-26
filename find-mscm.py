@@ -61,11 +61,12 @@ if __name__ == '__main__':
     numBins = 32
 
     #--Dataset file path.
-    dirDataset = '/home/cam/Documents/Texture-Analysis/test-rotated-200/'
+    dirDataset = '<dataset filepath>'
     dirTextures = sorted(listdir(dirDataset))
-    angle = '200'
+    angle = '<rotation angle of images (for file naming)'
 
-    #--Allocate space for images.
+    #--Allocate space for images (dimx, dimy, # of textures, # of images per texture). 
+    #--Must be modified for the correct image dimensions, texture class number, and number of images per class.
     images = np.zeros((128, 128, 13, 16))
 
     print("Reading images.")
