@@ -13,8 +13,6 @@ The multi-scale co-occurrence matrix, constructed similarly to the GLCM, is para
 
 ![MSCM Neigborhood for r=1](https://github.com/camhpj/Texture-Analysis/blob/main/mscm-neighborhood.jpg)
 
-As the radius increases the number of pixels counted also increases (12 for r=2, 16 for r=3, and 32 for r=4). Due to the similarity between the two, the MSCM can be thought of as a stack of GLCMs where each slice is a GLCM for a particular radius as seen in figure xx. The MSCM contains information from every discrete direction as well as at multiple distances. Under ideal rotations (90 and 180) the MSCM calculated will be identical to the MSCM calculated from the unrotated image. The goal of this more expensive calculation is to reduce the amount by which features calculated from a texture change when the texture is rotated.
+As the radius increases the number of pixels counted also increases (12 for r=2, 16 for r=3, and 32 for r=4). Due to the similarity between the two, the MSCM can be thought of as a stack of GLCMs where each slice is a GLCM for a particular radius. The MSCM contains information from every discrete direction as well as at multiple distances. Under ideal rotations (90 and 180) the MSCM calculated will be identical to the MSCM calculated from the unrotated image. The goal of this more expensive calculation is to reduce the amount by which features calculated from a texture change when the texture is rotated.
 
-The MSCM unlike the GLCM is parameterized by only a radius _r_. For each radius specificied a co-occurence matrix is calculated. 
-brodatz-train-mscm is a defined by (MSCM, MSCM, texture class, image #, radius #).
-brodatzFeatures is contains contrast, correlation, energy, and homogeneity for each image (feature, texture, image, radius).
+An MSCM in the code is defined as a 5 dimensional array (GLCM, GLCM, texture class, image #, radius #). This is done to make handling the data structure more streamlined. The first two dimensions contain a co-occurence matrix. The next 3 dimensions are used to specify the GLCM to be operated on using the class, image, and radius numbers.
