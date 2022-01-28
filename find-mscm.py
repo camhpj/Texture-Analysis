@@ -61,7 +61,7 @@ if __name__ == '__main__':
     numBins = 32
 
     #--Dataset file path.
-    dirDataset = '/home/cam/Documents/Texture-Analysis/test-rotated-200/'
+    dirDataset = '/home/cam/Documents/Fall 2021/Texture-Analysis/test-rotated-200/'
     dirTextures = sorted(listdir(dirDataset))
     angle = '200'
 
@@ -88,4 +88,4 @@ if __name__ == '__main__':
 
     
     mdic = {"brodatzMSCM_test_200": MSCM}
-    savemat('/home/cam/Documents/Texture-Analysis/MSCM Files/brodatz-mscm-test-200.mat', mdict=mdic)
+    savemat('/home/cam/Documents/Fall 2021/Texture-Analysis/brodatz-mscm-test-200.mat', mdict=mdic)
