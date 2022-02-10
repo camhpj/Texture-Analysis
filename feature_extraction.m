@@ -1,25 +1,29 @@
-%% Create MSCMtm
 load('MSCM Files/brodatz-mscm-test-200.mat');
 clear Description
 
-%%
-%--Image 1 texture group 1 radius 1 = brodaztFeatures(1, 1, 1, :)
+%% Calculate and construct feature matrix.
+%--brodatzFeatures(numFeature, numTexture, numImage, radius)
+%--contrast=1, correlation=2, energy=3, homogeneity=4
 
-brodatzFeatures_test_200 = zeros(4, 13, 16, 4);
+numTextures = 0;
+numImages = 0;
+numRadii = 0;
+fileName = "brodatzFeatures_{test or train}_{angle}.mat";
 
-for t = 1:13
-    for i = 1:16
-        for r = 1:4
-            brodatzFeatures_test_200(1, t, i, r) = graycoprops(brodatzMSCM_test_200(:, :, t, i, r), 'contrast').Contrast; % Contrast
-            brodatzFeatures_test_200(2, t, i, r) = graycoprops(brodatzMSCM_test_200(:, :, t, i, r), 'correlation').Correlation; % Correlation
-            brodatzFeatures_test_200(3, t, i, r) = graycoprops(brodatzMSCM_test_200(:, :, t, i, r), 'energy').Energy; % Energy
-            brodatzFeatures_test_200(4, t, i, r) = graycoprops(brodatzMSCM_test_200(:, :, t, i, r), 'homogeneity').Homogeneity; % Homogeneity
-            %brodatzFeatures(5, t, i, r) = -sum(sum((MSCM.*log(brodatzMSCM_test_60(:, :, t, i, r) + eps)))); % Entropy
+brodatzFeatures = zeros(4, numTextures, numImages, numRadii);
+
+for t = 1:numTextures
+    for i = 1:numImages
+        for r = 1:numRadii
+            brodatzFeatures(1, t, i, r) = graycoprops(brodatzMSCM(:, :, t, i, r), 'contrast').Contrast;       % Contrast
+            brodatzFeatures(2, t, i, r) = graycoprops(brodatzMSCM(:, :, t, i, r), 'correlation').Correlation; % Correlation
+            brodatzFeatures(3, t, i, r) = graycoprops(brodatzMSCM(:, :, t, i, r), 'energy').Energy;           % Energy
+            brodatzFeatures(4, t, i, r) = graycoprops(brodatzMSCM(:, :, t, i, r), 'homogeneity').Homogeneity; % Homogeneity
         end
     end
 end
 
-clear t i r
+clear t i r 
 
-%% save file
-save('MSCM Files/brodatz-features-test-200.mat', 'brodatzFeatures_test_200');
+%% Save file.
+save(sprintf('MSCM Files/%f', fileName), 'brodatzFeatures');
